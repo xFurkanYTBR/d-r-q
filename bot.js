@@ -324,6 +324,36 @@ client.on('message', msg => {
   }
 });
 
+client.on('message', msg => {
+  if (msg.content.toLowerCase() === 'piç darq') {
+    msg.reply('Sen Kendine Bak GÖT!');
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content.toLowerCase() === 'bayfrknyt') {
+    msg.reply('**O Benim Sahibim!**');
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content.toLowerCase() === 'orusbu bayfrknyt') {
+    msg.reply('**Adam Ol Sikerim SEnin Götünü**');
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content.toLowerCase() === 'darq') {
+    msg.reply('Efendim Canım :=');
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content.toLowerCase() === 'piç darq') {
+    msg.reply('**SEn Kendine Bakdınmı Amq Keli**');
+  }
+});
+
 client.elevation = message => {
   if(!message.guild) {
 	return; }
@@ -367,4 +397,4 @@ client.on("guildMemberAdd", member => {
 
 ////////////////////////
 
-client.login(ayarlar.token);
+client.login(process.env.BOT_TOKEN);
