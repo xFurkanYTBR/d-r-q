@@ -47,6 +47,7 @@ client.reload = command => {
   });
 };
 
+
 // Müzik Komutu // // API KODU DC DE //
 
 const { GOOGLE_API_KEY } = require('./anahtarlar.json');
@@ -102,7 +103,7 @@ client.on('message', async msg => {
 					let index = 0;
           
 				 msg.channel.sendEmbed(new Discord.RichEmbed()                  
-         .setTitle('Darq* | Şarkı Seçimi')
+         .setTitle('Kralbot | Şarkı Seçimi')
          .setDescription(`${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}`)
          .setFooter('Lütfen 1-10 arasında bir rakam seçiniz 10 saniye içinde liste iptal edilecektir.')
          .setColor('0x36393E'));
@@ -172,7 +173,7 @@ client.on('message', async msg => {
     .setColor('RANDOM'));
 		return msg.channel.sendEmbed(new Discord.RichEmbed()
     .setColor('RANDOM')
-    .setTitle("Darq* | Çalan")                            
+    .setTitle("Retdelta Müzik | Çalan")                            
     .addField('Başlık', `[${serverQueue.songs[0].title}](${serverQueue.songs[0].url})`, true)
     .addField("Süre", `${serverQueue.songs[0].durationm}:${serverQueue.songs[0].durations}`, true))
 	} else if (command === 'sıra') {
@@ -279,7 +280,7 @@ function play(guild, song) {
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
 
 	 serverQueue.textChannel.sendEmbed(new Discord.RichEmbed()                                   
-  .setTitle("**Darq* | 🎙 Müzik Başladı**",`https://cdn.discordapp.com/avatars/473974675194511361/6bb90de9efe9fb80081b185266bb94a6.png?size=2048`)
+  .setTitle("**Kralbot | 🎙 Müzik Başladı**",`https://cdn.discordapp.com/avatars/473974675194511361/6bb90de9efe9fb80081b185266bb94a6.png?size=2048`)
   .setThumbnail(`https://i.ytimg.com/vi/${song.id}/default.jpg?width=80&height=60`)
   .addField('\nBaşlık', `[${song.title}](${song.url})`, true)
   .addField("\nSes Seviyesi", `${serverQueue.volume}%`, true)
@@ -324,36 +325,6 @@ client.on('message', msg => {
   }
 });
 
-client.on('message', msg => {
-  if (msg.content.toLowerCase() === 'piç darq') {
-    msg.reply('Sen Kendine Bak GÖT!');
-  }
-});
-
-client.on('message', msg => {
-  if (msg.content.toLowerCase() === 'bayfrknyt') {
-    msg.reply('**O Benim Sahibim!**');
-  }
-});
-
-client.on('message', msg => {
-  if (msg.content.toLowerCase() === 'orusbu bayfrknyt') {
-    msg.reply('**Adam Ol Sikerim SEnin Götünü**');
-  }
-});
-
-client.on('message', msg => {
-  if (msg.content.toLowerCase() === 'darq') {
-    msg.reply('Efendim Canım :=');
-  }
-});
-
-client.on('message', msg => {
-  if (msg.content.toLowerCase() === 'piç darq') {
-    msg.reply('**SEn Kendine Bakdınmı Amq Keli**');
-  }
-});
-
 client.elevation = message => {
   if(!message.guild) {
 	return; }
@@ -384,7 +355,7 @@ client.on("guildMemberAdd", member => {
 	var channel = member.guild.channels.find("name", "giriş-çıkış");
 	if (!channel) return;
 	
-	var role = member.guild.roles.find("name", "「~:moneybag:~」✮ Ɩƛ ✮ αяму ✮「~:moneybag:~」");
+	var role = member.guild.roles.find("name", "Kafadar Ailesi");
 	if (!role) return;
 	
 	member.addRole(role); 
@@ -397,4 +368,62 @@ client.on("guildMemberAdd", member => {
 
 ////////////////////////
 
+client.on("guildMemberAdd", async member => {
+const kanal = member.guild.channels.find("name", "sohbet")
+kanal.sendMessage(member + '  ' + member.guild.name + ' adlı sunucuya hoşgeldin! Seni görmek ne güzel.')
+})
+
+client.on('guildCreate', guild => {
+  const owner = guild.owner
+  const mrb = guild.systemChannel
+  if (!mrb) return;
+  let merhaba = new Discord.RichEmbed()
+  .setColor(Math.floor(Math.random() * (0xFFFFFF + 1)))
+  .setAuthor(guild.name, guild.iconURL)
+  .addField('**Darq* Bot sunucunuza eklendi!**', `${owner}`)
+  .addField('**Darq* Bot** sunucunuzdaki insanlara kolaylıklar sağlar.', `**${prefix}bilgi** yazmanız yeterlidir!`)
+  .addField('**Botumuzun özelliklerini öğrenmek için**', `**${prefix}yardım** yazmanız yeterlidir!`)
+  .addField('Botumuzu eklemek istiyorsanız', `**${prefix}davet** yazarak ekleyebilirsiniz.`)
+  mrb.send(merhaba);
+});
+
+
+client.on('guildCreate', guild => {
+  const embed = new Discord.RichEmbed()
+  .setColor('RANDOM')
+  .setTitle('Bir Sunucuya Katıldım;')
+  .setDescription(`Bot, 》${guild.name}《 adlı sunucuya katıldı [${guild.memberCount} Üye]!`)
+  .setFooter('Darq*', client.user.avatarURL)
+  .setTimestamp()
+  client.channels.get('461482059802607625').send(embed);
+});
+
+client.on('guildDelete', guild => {
+  const embed = new Discord.RichEmbed()
+  .setColor('RANDOM')
+  .setTitle('Bir Sunucudan Ayrıldım;')
+  .setDescription(`Bot, 》${guild.name}《 sunucudan ayrıldı [${guild.memberCount} Üye]!`)
+  .setFooter('Darq*', client.user.avatarURL)
+  .setTimestamp()
+  client.channels.get('461482059802607625').send(embed);
+});
+
+
+
 client.login(process.env.BOT_TOKEN);
+
+
+client.on("message", msg => {
+        const kufur = ["oç", "amk", "ananı sikiyim", "ananıskm", "piç", "amk", "amsk", "sikim", "sikiyim", "orospu çocuğu", "piç kurusu", "kahpe", "orospu", "mal", "sik", "yarrak", "amcık", "amık", "yarram", "sikimi ye", "mk", "mq", "aq", "ak", "amq",];
+        if (kufur.some(word => msg.content.includes(word))) {
+          try {
+             if (!msg.member.hasPermission("BAN_MEMBERS")) {
+                  msg.delete();
+
+                  return msg.reply('Küfür etmemelisin! :warning:').then(msg => msg.delete(3000));
+             }              
+          } catch(err) {
+            console.log(err);
+          }
+        }
+    });
